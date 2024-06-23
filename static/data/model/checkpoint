@@ -1,0 +1,2 @@
+model_checkpoint_path: "CGTrans_IU_model.weights.best.tf"
+all_model_checkpoint_paths: "CGTrans_IU_model.weights.best.tf"

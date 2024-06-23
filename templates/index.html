@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PulmoAI - Home</title>
+    <link rel="icon" type="image/png" href="/static/images/pulmoai-logo.png">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .title {
+            background-color: #12bccc;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1, h2 {
+            text-align: center;
+        }
+
+        .tabs {
+            display: flex;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #12bccc;
+        }
+
+        .tab {
+            flex: 1;
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
+            background-color: #12bccc;
+            color: #fff;
+            border: none;
+            border-right: 2px solid #fff;
+        }
+
+        .tab:hover {
+            background-color: #2980b9;
+        }
+
+        .tab:last-child {
+            border-right: none;
+        }
+
+        .tab-content {
+            display: none;
+            padding: 20px;
+        }
+
+        #patientDetails {
+            display: block;
+            border-top: 2px solid #12bccc;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+
+        /* Custom styling for the custom dropdown */
+        .custom-dropdown {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+            margin-bottom: 15px; /* Add spacing after the dropdown */
+        }
+
+        .custom-dropdown select {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            /* background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="%234B5563"><path d="M8 12L0 4h16L8 12z"/></svg>') no-repeat right #fff;
+            background-size: 15px; */
+            border: 1px solid #ccc;
+            cursor: pointer;
+            height: 40px; /* Adjust the height as needed */
+        }
+
+        .custom-dropdown:after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            margin-top: -3px;
+            border-width: 6px 6px 0;
+            border-color: #000 transparent transparent;
+            border-style: solid;
+            pointer-events: none;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            display: inline-block;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #scanImageInput {
+            display: none;
+        }
+
+        #uploadLabel {
+            background-color: #12bccc;
+            color: #fff;
+            padding: 10px 15px;
+            cursor: pointer;
+            display: inline-block;
+            margin-bottom: 15px;
+            width: auto;
+        }
+
+        #uploadLabel:hover {
+            background-color: #2980b9;
+        }
+
+        #devTeamDetails {
+            margin-top: 30px;
+            border-top: 2px solid #12bccc;
+            padding-top: 20px;
+        }
+
+        #modelDetails {
+            margin-top: 20px;
+            border-top: 2px solid #12bccc;
+            padding-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="title">
+    <img src="/static/images/pulmoai.png" alt="PulmoAI Logo" width="300" height="100">
+</div>
+
+<div class="container">
+    <h1>Patient Details</h1>
+    <div id="patientDetails" class="tab-content">
+        <form id="diagnosisForm" method="post" action="/generateClinicalDescription" enctype="multipart/form-data">
+            <label for="patientName">Name:</label>
+            <input type="text" id="patientName" name="patientName" required>
+
+            <label for="gender">Gender:</label>
+            <div class="custom-dropdown">
+                <select id="gender" name="gender" required>
+                    <option value="" disabled selected>Select Gender</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+
+            <label for="age">Age:</label>
+            <input type="number" id="age" name="age" required>
+
+            <label for="phoneNumber">Phone Number:</label>
+            <input type="tel" id="phoneNumber" name="phoneNumber" pattern="[0-9]{10}" placeholder="1234567890" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="address">Address:</label>
+            <textarea id="address" name="address" rows="3" required></textarea>
+
+            <label for="medicalHistory">Medical History:</label>
+            <textarea id="medicalHistory" name="medicalHistory" rows="3" required></textarea>
+
+            <label for="diagnosticKeyterms">Diagnostic Keyterms:</label>
+            <input type="text" id="diagnosticKeyterms" name="diagnosticKeyterms" required>
+
+            <label for="retinalScanType">Type of Retinal Scan:</label>
+            <div class="custom-dropdown">
+                <select id="retinalScanType" name="retinalScanType" required>
+                    <option value="" disabled selected>Select Scan Type</option>
+                    <option value="Frontal X-Ray">Frontal X-Ray</option>
+                    <option value="Lateral X-Ray">Lateral X-Ray</option>
+                </select>
+            </div>
+
+            <input type="file" id="scanImageInput" name="scanImageInput" accept="image/*" style="display: none">
+            <label id="uploadLabel" for="scanImageInput">Upload Chest X-Ray Image</label>
+
+            <button type="submit">Generate Medical Report</button>
+            <div id="clinicalDescription"></div>
+        </form>
+    </div>
+</div>
+
+<script>
+    function uploadScanImage() {
+        document.getElementById('scanImageInput').click();
+    }
+
+</script>
+
+</body>
+</html>

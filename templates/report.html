@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PulmoAI Medical Report</title>
+    <link rel="icon" type="image/png" href="/static/images/pulmoai-logo.png">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .title {
+            background-color: #12bccc;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .patient-info {
+            margin-bottom: 20px;
+        }
+        .patient-info table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .patient-info th, .patient-info td {
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
+            text-align: left;
+        }
+        .patient-info th {
+            background-color: #f2f2f2;
+        }
+        .image-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .image-container img {
+            max-width: 60%;
+            border-radius: 10px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .button-container button {
+            padding: 10px 20px;
+            background-color: #12bccc;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        .button-container button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="title">
+        <img src="/static/images/pulmoai.png" alt="PulmoAI Logo" width="300" height="100">
+    </div>
+    <div class="container">
+        <h1>Medical Report</h1>
+        <div class="patient-info">
+            <table>
+                <tr>
+                    <th><strong>Name</strong></th>
+                    <th>{{ data[0] }}</th>
+                </tr>
+                <tr>
+                    <td><strong>Gender</strong></td>
+                    <td>{{ data[1] }}</td>
+                </tr>
+                <tr>
+                    <td><strong>Age</strong></td>
+                    <td>{{ data[2] }}</td>
+                </tr>
+                <tr>
+                    <td><strong>Mobile</strong></td>
+                    <td>{{ data[3] }}</td>
+                </tr>
+                <tr>
+                    <td><strong>Email</strong></td>
+                    <td>{{ data[4] }}</td>
+                </tr>
+                <tr>
+                    <td><strong>Address</strong></td>
+                    <td>{{ data[5] }}</td>
+                </tr>
+                <tr>
+                    <td><strong>Medical History</strong></td>
+                    <td>{{ data[6] }}</td>
+                </tr>
+                <tr>
+                    <td><strong>Diagnostic Attributes</strong></td>
+                    <td>{{ data[7] }}</td>
+                </tr>
+                <tr>
+                    <td><strong>Scan Type</strong></td>
+                    <td>{{ data[8] }}</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- Displaying the image -->
+        <div class="image-container">
+            <img src="{{ data[9] }}" alt="Chest X-Ray">
+        </div>
+
+        <div class="patient-info">
+            <p><strong>Clinical Findings: </strong> {{ data[10] }}</p>
+        </div>
+    </div>
+
+    <!-- Button to print the medical report -->
+    <div class="button-container">
+        <button onclick="window.print();">Print</button>
+        <button onclick="window.location.href='/';">Try Another</button>
+    </div>
+
+</body>
+</html>
